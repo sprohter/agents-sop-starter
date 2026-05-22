@@ -1,0 +1,12 @@
+{
+  // Copy this file to local-config.jsonc and keep it out of version control.
+  "agentsSopRoot": "<absolute-path-to-agents-sop-starter>",
+  "workspaceRoot": "<workspace-root>",
+  "issueSystemUrl": "<issue-system-url>",
+  "documentSystemUrl": "<document-system-url>",
+  "chatSystemUrl": "<chat-system-url>",
+  "env": {
+    "TOKEN_ENV_VAR_NAME": "<name-only-do-not-put-token-here>"
+  }
+}
+

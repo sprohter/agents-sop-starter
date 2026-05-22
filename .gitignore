@@ -1,0 +1,11 @@
+local/
+runtime/
+outputs/
+*.log
+*.tmp
+.env
+.env.*
+*.secret.*
+*.token
+secrets.*
+
