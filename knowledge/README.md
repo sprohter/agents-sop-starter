@@ -30,6 +30,14 @@
 - `../templates/knowledge-card.template.md`
 - `../templates/decision-record.template.md`
 
+## 当前示例
+
+如果想快速理解知识卡怎么配合 SOP 使用，可以先看：
+
+- `testing/triage-rules.knowledge.md`
+- `testing/defect-writing.knowledge.md`
+- `testing/result-layering.knowledge.md`
+
 ## 写入原则
 
 - 只写稳定信息。

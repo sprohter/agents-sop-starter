@@ -62,7 +62,11 @@ agents-sop-starter/
 │   └── qa/
 │       └── functional-test-sop.example.md
 ├── knowledge/
-│   └── README.md
+│   ├── README.md
+│   └── testing/
+│       ├── defect-writing.knowledge.md
+│       ├── result-layering.knowledge.md
+│       └── triage-rules.knowledge.md
 ├── governance/
 │   ├── maintenance-rules.md
 │   ├── privacy-and-share-boundary.md
@@ -124,8 +128,23 @@ routing.md 命中：客服反馈 / 问题处理
 
 1. 读取 `roles/qa.example.md`。
 2. 读取 `sops/qa/functional-test-sop.example.md`。
-3. 观察一个岗位入口如何挂载具体 SOP。
-4. 再把示例复制成自己的岗位和流程。
+3. 读取 `sops/qa/issue-feedback-analysis-sop.example.md`。
+4. 读取 `knowledge/testing/` 下的三张知识卡。
+5. 观察一个岗位入口如何挂载具体 SOP 和知识卡。
+6. 再把示例复制成自己的岗位和流程。
+
+## 自带测试域示例
+
+当前仓库附带一套测试域的脱敏示例，适合直接参考：
+
+| 类型 | 文件 | 用途 |
+|------|------|------|
+| 岗位卡 | `roles/qa.example.md` | 测试岗位入口示例 |
+| SOP | `sops/qa/functional-test-sop.example.md` | 功能测试流程示例 |
+| SOP | `sops/qa/issue-feedback-analysis-sop.example.md` | 问题反馈分析流程示例 |
+| 知识卡 | `knowledge/testing/*.knowledge.md` | 分诊、缺陷写法、结果分层 |
+
+这些内容只保留跨团队可复用的结构和规则，不包含真实业务对象、系统名或内部路径。
 
 ## 不包含什么
 

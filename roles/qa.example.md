@@ -25,7 +25,7 @@ last_updated: `<yyyy-mm-dd>`
 |------|-----|
 | 新需求 / 功能优化验收 | `../sops/qa/functional-test-sop.example.md` |
 | Bug 修复验证 | 待创建 |
-| 线上反馈分诊 | 待创建 |
+| 线上反馈分诊 | `../sops/qa/issue-feedback-analysis-sop.example.md` |
 
 ## 4. 输入要求
 

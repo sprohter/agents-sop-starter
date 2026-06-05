@@ -28,6 +28,7 @@
 
 | 岗位 / 触发词 | 入口文件 | 备注 |
 |---------------|----------|------|
+| 测试、QA、测试负责人、质量负责人 | `roles/qa.example.md` | 内置测试岗位示例 |
 | `<role-name>`、`<role-trigger>` | `roles/<role-name>.md` | 复制 `templates/role-card.template.md` 创建 |
 
 ## SOP 路由占位区
@@ -36,6 +37,8 @@
 
 | 场景 / 触发词 | 入口文件 | 备注 |
 |---------------|----------|------|
+| 功能测试、测试执行、验收、Bug 回归 | `sops/qa/functional-test-sop.example.md` | 内置测试 SOP 示例 |
+| 问题反馈、问题分析、线上反馈分诊、缺陷分析 | `sops/qa/issue-feedback-analysis-sop.example.md` | 内置测试 SOP 示例 |
 | `<scenario>`、`<trigger>` | `sops/<domain>/<sop-name>.md` | 复制 `templates/sop.template.md` 创建 |
 
 ## 路由输出要求
