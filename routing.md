@@ -19,6 +19,11 @@
 | 查找已有经验、术语、口径、案例摘要 | `knowledge/README.md` | 读取知识卡 |
 | 路由不准、触发词冲突、任务不知道读哪里 | `governance/routing-maintenance.md` | 维护路由表 |
 | 分享前检查、脱敏、能不能外发 | `governance/privacy-and-share-boundary.md` | 检查分享边界 |
+| public 分享、private 备份、内部包、导出 profile、旧分享仓 | `governance/export-profiles.md` | 按可见性选择导出范围 |
+| 修改治理规则、框架变更、推送、删除、合并、force-with-lease | `governance/change-control.md` | 变更分级和外部写入门禁 |
+| 定时任务、自动同步、后台任务、watchdog、不要新开会话 | `governance/automation-rules.md` | 自动化登记和静默运行规则 |
+| 创建 skill、共享 skill、skill 生命周期、技能退役 | `governance/skill-governance.md` | 技能治理规则 |
+| 资产登记、治理面板、文件状态、public/private 标记 | `governance/asset-registry.md` | 轻量资产目录规则 |
 | 框架怎么维护、目录怎么放、版本怎么管 | `governance/maintenance-rules.md` | 框架治理 |
 | 本地 agent 接入、入口文件、配置样板 | `config-templates/agent-entry.template.md` | 接入宿主 agent |
 
@@ -39,6 +44,7 @@
 |---------------|----------|------|
 | 功能测试、测试执行、验收、Bug 回归 | `sops/qa/functional-test-sop.example.md` | 内置测试 SOP 示例 |
 | 问题反馈、问题分析、线上反馈分诊、缺陷分析 | `sops/qa/issue-feedback-analysis-sop.example.md` | 内置测试 SOP 示例 |
+| 反馈自动建单、反馈转缺陷、自动创建缺陷、issue tracker 写入 | `sops/qa/business-feedback-to-zentao-sop.example.md` | 内置公开安全示例 |
 | `<scenario>`、`<trigger>` | `sops/<domain>/<sop-name>.md` | 复制 `templates/sop.template.md` 创建 |
 
 ## 路由输出要求
@@ -59,4 +65,3 @@
 2. 若 SOP 同级冲突，选择与用户当前对象最接近的岗位。
 3. 若仍冲突，先说明冲突点并请求确认。
 4. 处理完成后，在 `governance/routing-maintenance.md` 记录是否需要补路由。
-

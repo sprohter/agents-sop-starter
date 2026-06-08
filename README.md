@@ -16,7 +16,7 @@
 | 岗位入口 | `roles/` | 描述谁负责、什么时候接管、常用 SOP 是什么 |
 | 标准流程 | `sops/` | 保存可重复执行、可培训、可检查的 SOP |
 | 知识沉淀 | `knowledge/` | 保存稳定经验、术语、口径和事实 |
-| 底座治理 | `governance/` | 管理沉淀、隐私、路由维护和版本维护 |
+| 底座治理 | `governance/` | 管理沉淀、隐私、路由、导出、自动化和技能生命周期 |
 | 复制模板 | `templates/` | 快速创建岗位卡、SOP、知识卡和路由项 |
 | 本地接入 | `config-templates/` | 让 Codex / Claude / 其他 Agent 接入本底座 |
 
@@ -33,7 +33,7 @@ flowchart TD
     F --> G
     G --> H{"是否发现新缺口？"}
     H -- "否" --> I["任务闭环"]
-    H -- "是" --> J["governance/<br/>沉淀 / 路由 / 隐私 / 维护"]
+    H -- "是" --> J["governance/<br/>沉淀 / 路由 / 隐私 / 导出"]
     J --> B
     K["contract.md<br/>行为公约"] --> B
     K --> D
@@ -68,10 +68,16 @@ agents-sop-starter/
 │       ├── result-layering.knowledge.md
 │       └── triage-rules.knowledge.md
 ├── governance/
+│   ├── README.md
+│   ├── asset-registry.md
+│   ├── automation-rules.md
+│   ├── change-control.md
+│   ├── export-profiles.md
 │   ├── maintenance-rules.md
 │   ├── privacy-and-share-boundary.md
 │   ├── routing-maintenance.md
-│   └── sedimentation.md
+│   ├── sedimentation.md
+│   └── skill-governance.md
 ├── templates/
 │   ├── decision-record.template.md
 │   ├── knowledge-card.template.md
@@ -146,6 +152,19 @@ routing.md 命中：客服反馈 / 问题处理
 
 这些内容只保留跨团队可复用的结构和规则，不包含真实业务对象、系统名或内部路径。
 
+## 自带治理规则
+
+| 文件 | 用途 |
+|------|------|
+| `governance/privacy-and-share-boundary.md` | 分享边界与脱敏检查 |
+| `governance/export-profiles.md` | public / private / internal 导出范围 |
+| `governance/change-control.md` | 治理、推送、删除、外部写入的变更分级 |
+| `governance/automation-rules.md` | 定时任务、自动同步和后台任务规则 |
+| `governance/skill-governance.md` | 技能创建、共享和退役规则 |
+| `governance/asset-registry.md` | 资产登记和 public/private 标记 |
+| `governance/routing-maintenance.md` | 路由维护与冲突处理 |
+| `governance/sedimentation.md` | 经验沉淀位置与写法 |
+
 ## 不包含什么
 
 - 真实业务流程细节
@@ -207,4 +226,3 @@ routing.md 定位入口
 - 项目管理
 
 岗位只需要各自补充自己的 SOP 内容，不需要改底座结构。
-

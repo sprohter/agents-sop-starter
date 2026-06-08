@@ -20,6 +20,17 @@
 | 可复制空模板 | `templates/` |
 | agent 怎么接入 | `config-templates/` |
 
+## 2.1 治理规则索引
+
+| 问题 | 入口 |
+|------|------|
+| 能不能分享、怎么脱敏 | `privacy-and-share-boundary.md` |
+| public / private / internal 怎么分 | `export-profiles.md` |
+| 改治理、路由、skill 或同步任务前怎么控风险 | `change-control.md` |
+| 定时任务、后台任务、自动同步怎么登记 | `automation-rules.md` |
+| skill 怎么创建、共享、退役 | `skill-governance.md` |
+| 资产目录怎么登记，避免泄露运行态 | `asset-registry.md` |
+
 ## 3. 新增内容前检查
 
 新增文件前先问：
@@ -52,4 +63,4 @@
 - 把 SOP 写成历史流水账。
 - 把真实业务资料当示例。
 - 把个人本机路径写成团队标准。
-
+- 把凭证密钥或运行态噪音当作可备份框架资产。
