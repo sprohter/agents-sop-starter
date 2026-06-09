@@ -1,5 +1,7 @@
 local/
-runtime/
+runtime/*
+!runtime/
+!runtime/README.md
 outputs/
 *.log
 *.tmp
@@ -8,4 +10,3 @@ outputs/
 *.secret.*
 *.token
 secrets.*
-
