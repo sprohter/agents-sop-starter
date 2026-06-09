@@ -19,6 +19,7 @@
 | 底座治理 | `governance/` | 管理沉淀、隐私、路由、导出、自动化和技能生命周期 |
 | 复制模板 | `templates/` | 快速创建岗位卡、SOP、知识卡和路由项 |
 | 本地接入 | `config-templates/` | 让 Codex / Claude / 其他 Agent 接入本底座 |
+| 扩展骨架 | `adapters/`、`tools/`、`runtime/`、`collab/`、`case-studies/`、`archive/` | 承接接入、工具、运行态、协作、案例和归档 |
 
 ## 底座架构
 
@@ -29,12 +30,15 @@ flowchart TD
     B --> D["sops/<br/>标准流程"]
     D --> E["knowledge/<br/>稳定知识"]
     D --> F["templates/<br/>输出模板"]
+    D --> L["tools/<br/>工具索引"]
     E --> G["输出结论<br/>证据 / 风险 / 下一步"]
     F --> G
+    L --> G
     G --> H{"是否发现新缺口？"}
     H -- "否" --> I["任务闭环"]
-    H -- "是" --> J["governance/<br/>沉淀 / 路由 / 隐私 / 导出"]
+    H -- "是" --> J["governance/<br/>沉淀 / 纠偏 / 隐私 / 导出"]
     J --> B
+    M["adapters / runtime<br/>本地接入与运行态边界"] --> B
     K["contract.md<br/>行为公约"] --> B
     K --> D
     K --> G
@@ -51,43 +55,77 @@ sops 负责流程执行，knowledge 负责事实沉淀，governance 负责持续
 
 ```text
 agents-sop-starter/
-├── README.md
-├── contract.md
-├── routing.md
-├── roles/
-│   ├── README.md
-│   └── qa.example.md
-├── sops/
-│   ├── README.md
-│   └── qa/
+├── README.md                         ← 框架导航：先读这里，了解底座能力和目录
+├── contract.md                       ← Agent 最小公约：输出、证据、安全和交付自检
+├── routing.md                        ← 统一任务路由：把用户请求导向岗位 / SOP / 治理入口
+├── adapters/                         ← 多宿主接入说明：Codex、Claude 等如何接入本底座
+│   └── README.md                     ← Adapter 边界和入口说明
+├── tools/                            ← 工具索引：只放工具说明，不放凭证和运行态
+│   └── README.md                     ← 工具登记格式和安全边界
+├── runtime/                          ← 运行态边界：状态、缓存、日志和本机配置应放哪里
+│   └── README.md                     ← 运行态不入 public / private 同步的规则
+├── roles/                            ← 岗位入口：谁负责、何时接管、常用 SOP
+│   ├── README.md                     ← 岗位卡创建说明
+│   └── qa.example.md                 ← 测试岗位示例卡
+├── sops/                             ← 标准作业流程：可重复执行、可培训、可检查
+│   ├── README.md                     ← SOP 创建说明
+│   └── qa/                           ← 测试域公开安全示例
 │       └── functional-test-sop.example.md
-├── knowledge/
-│   ├── README.md
-│   └── testing/
+├── knowledge/                        ← 稳定知识：术语、口径、经验卡、事实说明
+│   ├── README.md                     ← 知识层说明
+│   └── testing/                      ← 测试域知识卡示例
 │       ├── defect-writing.knowledge.md
 │       ├── result-layering.knowledge.md
 │       └── triage-rules.knowledge.md
-├── governance/
-│   ├── README.md
-│   ├── asset-registry.md
-│   ├── automation-rules.md
-│   ├── change-control.md
-│   ├── export-profiles.md
-│   ├── maintenance-rules.md
-│   ├── privacy-and-share-boundary.md
-│   ├── routing-maintenance.md
-│   ├── sedimentation.md
-│   └── skill-governance.md
-├── templates/
+├── governance/                       ← 框架治理：沉淀、纠偏、分享、自动化和生命周期
+│   ├── README.md                     ← 治理规则索引
+│   ├── architecture.md               ← 框架结构分层和依赖关系
+│   ├── asset-registry.md             ← 资产目录与 public/private/internal 标记
+│   ├── automation-rules.md           ← 定时任务、后台同步、不要新开会话
+│   ├── change-control.md             ← 变更分级、推送、删除和外部写入门禁
+│   ├── export-profiles.md            ← public starter / private backup / internal package 分级
+│   ├── integrity-checklist.md        ← 框架完整性检查清单
+│   ├── maintenance-rules.md          ← 目录维护和最小联动规则
+│   ├── privacy-and-share-boundary.md ← 分享边界与脱敏规则
+│   ├── routing-maintenance.md        ← 路由维护与冲突处理
+│   ├── self-correction.md            ← 自动纠偏机制：发现偏差时如何回到正确路径
+│   ├── sedimentation.md              ← 经验沉淀位置、写法和成熟度
+│   └── skill-governance.md           ← Skill 创建、共享、退役规则
+├── templates/                        ← 复制模板：创建岗位卡、SOP、知识卡、路由项
 │   ├── decision-record.template.md
 │   ├── knowledge-card.template.md
 │   ├── role-card.template.md
 │   ├── route-entry.template.md
 │   └── sop.template.md
-└── config-templates/
+├── collab/                           ← 多 agent 协作骨架：交接、复核、分工的公开规则
+│   └── README.md
+├── case-studies/                     ← 案例骨架：只放脱敏案例摘要和复盘模板
+│   └── README.md
+├── archive/                          ← 归档骨架：退役内容和历史方案的放置规则
+│   └── README.md
+└── config-templates/                 ← 本地接入样板：不放真实凭证
     ├── agent-entry.template.md
     └── local-config.example.jsonc
 ```
+
+### 目录分层口径
+
+| 层 | 什么时候读 | 什么时候写 |
+|----|------------|------------|
+| `contract.md` | 任何 agent 接入、输出或执行高风险动作前 | 通用行为边界变化时 |
+| `routing.md` | 收到用户请求后，先判断入口 | 新增岗位、SOP、skill 或治理入口时 |
+| `roles/` | 需要确认岗位职责和接管边界时 | 新增岗位或岗位边界变化时 |
+| `sops/` | 需要按步骤执行一个可重复流程时 | 某流程可培训、可复用、可验收时 |
+| `knowledge/` | 需要稳定事实、术语、判断口径时 | 经验不够完整成 SOP，但下次会复用时 |
+| `governance/` | 框架维护、分享、纠偏、自动化和变更控制时 | 框架规则或安全边界变化时 |
+| `templates/` | 创建新文档前复制格式时 | 某类输出格式需要统一时 |
+| `adapters/` | 不同 agent / IDE / CLI 接入底座时 | 新增宿主接入方式时 |
+| `tools/` | SOP 需要调用可复用工具或脚本时 | 新增工具索引卡时 |
+| `runtime/` | 讨论运行态、缓存、日志、本机配置边界时 | 只写 README / 示例，不提交真实运行态 |
+| `collab/` | 多 agent 分工、复核、交接时 | 协作协议需要标准化时 |
+| `case-studies/` | 需要参考脱敏案例摘要时 | 只写可公开的抽象案例，不写真实证据 |
+| `archive/` | 查历史方案或退役内容时 | 文件退役但仍需保留替代入口时 |
+| `config-templates/` | 接入本地 agent 或配置样板时 | 只放占位符，不放真实配置 |
 
 ## 推荐读取顺序
 
@@ -157,12 +195,15 @@ routing.md 命中：客服反馈 / 问题处理
 | 文件 | 用途 |
 |------|------|
 | `governance/privacy-and-share-boundary.md` | 分享边界与脱敏检查 |
+| `governance/architecture.md` | 框架结构分层和依赖关系 |
+| `governance/integrity-checklist.md` | 框架完整性检查清单 |
 | `governance/export-profiles.md` | public / private / internal 导出范围 |
 | `governance/change-control.md` | 治理、推送、删除、外部写入的变更分级 |
 | `governance/automation-rules.md` | 定时任务、自动同步和后台任务规则 |
 | `governance/skill-governance.md` | 技能创建、共享和退役规则 |
 | `governance/asset-registry.md` | 资产登记和 public/private 标记 |
 | `governance/routing-maintenance.md` | 路由维护与冲突处理 |
+| `governance/self-correction.md` | 自动纠偏机制，防止错误路径持续扩散 |
 | `governance/sedimentation.md` | 经验沉淀位置与写法 |
 
 ## 不包含什么

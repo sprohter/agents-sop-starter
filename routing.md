@@ -15,14 +15,23 @@
 |---------------|----------|------|
 | 新增岗位、岗位职责、岗位边界、岗位 SOP | `roles/README.md` | 创建或维护岗位卡 |
 | 新建 SOP、流程、标准作业、操作步骤、处理规范 | `sops/README.md` | 创建或维护 SOP |
+| 框架结构、目录说明、完整性、底座缺什么 | `governance/architecture.md` | 理解框架分层 |
+| 检查框架完整性、starter 是否够完整、缺哪些基础件 | `governance/integrity-checklist.md` | 完整性清单 |
 | 沉淀经验、复盘、知识库、规则沉淀、口径沉淀 | `governance/sedimentation.md` | 判断沉淀位置和写法 |
 | 查找已有经验、术语、口径、案例摘要 | `knowledge/README.md` | 读取知识卡 |
 | 路由不准、触发词冲突、任务不知道读哪里 | `governance/routing-maintenance.md` | 维护路由表 |
+| agent 走错路、证据不足、结论不稳、输出偏移、遗漏规则 | `governance/self-correction.md` | 自动纠偏机制 |
 | 分享前检查、脱敏、能不能外发 | `governance/privacy-and-share-boundary.md` | 检查分享边界 |
 | public 分享、private 备份、内部包、导出 profile、旧分享仓 | `governance/export-profiles.md` | 按可见性选择导出范围 |
 | 修改治理规则、框架变更、推送、删除、合并、force-with-lease | `governance/change-control.md` | 变更分级和外部写入门禁 |
 | 定时任务、自动同步、后台任务、watchdog、不要新开会话 | `governance/automation-rules.md` | 自动化登记和静默运行规则 |
 | 创建 skill、共享 skill、skill 生命周期、技能退役 | `governance/skill-governance.md` | 技能治理规则 |
+| adapter、Codex 接入、Claude 接入、多宿主 | `adapters/README.md` | 接入层说明 |
+| 工具索引、脚本说明、工具卡 | `tools/README.md` | 工具层说明 |
+| runtime、缓存、日志、本机配置、运行态噪音 | `runtime/README.md` | 运行态边界 |
+| 多 agent 协作、交接、复核 | `collab/README.md` | 协作骨架 |
+| 案例、复盘、脱敏样例 | `case-studies/README.md` | 案例骨架 |
+| 归档、退役、历史方案 | `archive/README.md` | 归档规则 |
 | 资产登记、治理面板、文件状态、public/private 标记 | `governance/asset-registry.md` | 轻量资产目录规则 |
 | 框架怎么维护、目录怎么放、版本怎么管 | `governance/maintenance-rules.md` | 框架治理 |
 | 本地 agent 接入、入口文件、配置样板 | `config-templates/agent-entry.template.md` | 接入宿主 agent |

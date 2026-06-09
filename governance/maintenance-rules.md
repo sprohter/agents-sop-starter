@@ -19,6 +19,12 @@
 | 框架怎么维护 | `governance/` |
 | 可复制空模板 | `templates/` |
 | agent 怎么接入 | `config-templates/` |
+| 多宿主接入说明 | `adapters/` |
+| 工具说明和脚本索引 | `tools/` |
+| 运行态边界说明 | `runtime/` |
+| 多 agent 协作协议 | `collab/` |
+| 脱敏案例摘要 | `case-studies/` |
+| 退役内容和历史方案 | `archive/` |
 
 ## 2.1 治理规则索引
 
@@ -30,6 +36,8 @@
 | 定时任务、后台任务、自动同步怎么登记 | `automation-rules.md` |
 | skill 怎么创建、共享、退役 | `skill-governance.md` |
 | 资产目录怎么登记，避免泄露运行态 | `asset-registry.md` |
+| agent 走错路、证据不足或输出偏移怎么纠正 | `self-correction.md` |
+| 框架结构是否完整 | `architecture.md`、`integrity-checklist.md` |
 
 ## 3. 新增内容前检查
 
@@ -40,6 +48,7 @@
 3. 是否需要同步更新 `routing.md`？
 4. 是否包含敏感信息或业务资料？
 5. 是否能被其他岗位复用？
+6. 是否暴露出需要补充的纠偏规则？
 
 ## 4. 最小联动
 
