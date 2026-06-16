@@ -1,8 +1,8 @@
 # 测试结果分层输出规则
 
-status: example
-owner: `<team-or-role-owner>`
-last_updated: `<yyyy-mm-dd>`
+status: active
+owner: qa-team
+last_updated: 2026-06-05
 
 ## 结论
 

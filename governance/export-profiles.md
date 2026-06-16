@@ -20,6 +20,7 @@
 | C0 凭证密钥 | 密码、token、cookie、私钥、连接串 | 禁止 | 禁止 |
 | C1 运行态噪音 | 日志、缓存、会话、临时导出、生成报告 | 禁止 | 禁止 |
 | C2 敏感上下文 | 客户、内部链接、私有主机名、原始事故证据 | 禁止 | 强脱敏后谨慎，默认避免 |
+| C2P 个人竞争力资产 | 私有判断模型、个人 playbook、未通用化的独有经验 | 禁止 | 去除 C0/C1 后允许 |
 | C3 工作流程 | SOP、写作规范、测试方法、问题分诊方法 | 泛化后允许 | 去除 C0/C1 后允许 |
 | C4 框架资产 | 路由、治理、模板、公开安全 skill card | 允许 | 允许 |
 | C5 通用思想 | 架构模式、可复用清单、抽象示例 | 允许 | 允许 |
@@ -39,6 +40,15 @@ public starter 禁止包含：
 - 运行态、日志、本地缓存、含敏感信息的截图、一次性证据包。
 - 真实内部链接、群 ID、文档 ID、服务器路径、IP、私有系统标识。
 - 业务数据、客户数据、订单数据、事故细节，或能识别组织的截图。
+- 主要体现个人竞争力、私有方法论、个人 playbook 或未通用化独有经验的内容。
+- 带有结构化私有分享标记的内容，例如 `public_share: false`、`share_scope: private-backup`、`do_not_publish: true`、`private_markers: [personal_competitive_advantage]`。
+
+判断口径：
+
+- 如果内容可以被任何团队成员学习并维护，且抽掉业务上下文后仍成立，可以进入 public。
+- 如果内容更像个人判断优势、私有操作手感或暂不希望外化的经验，默认只进入 private backup。
+- 如果拿不准，不要为了“分享完整性”放宽 public 边界。
+- public 仍以 allowlist 为准；未进入 starter 专用 allowlist 的内容，即使没有私有标记，也不会自动进入 public。
 
 ## 4. Private Backup 规则
 
@@ -65,4 +75,3 @@ private backup 用于恢复，不是 secret 仓库。
 4. 复核 changed paths 和 commit 元数据。
 5. 只有目标和历史策略清楚后才 push。
 6. push 后回读远端分支、文件树和最新提交元数据。
-
