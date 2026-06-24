@@ -1,4 +1,4 @@
-﻿---
+---
 name: zentao-bug
 description: Use a ZenTao-style issue tracker workflow for creating, updating, verifying, activating, and closing defects with structured evidence. Keep account credentials and real project mappings outside the shared repository.
 ---

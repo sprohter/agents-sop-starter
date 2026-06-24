@@ -1,4 +1,4 @@
-﻿# Public Skill Cards
+# Public Skill Cards
 
 These examples describe reusable tool workflows in a public-safe way.
 

@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "status": "accepted_recorded",
+  "protocol_version": "0.1",
+  "task_id": "task-example-20260622-0001",
+  "receipt_id": "receipt-example-20260622-0001",
+  "capability": "route_review",
+  "accepted_at": "2026-06-22T10:00:00.000Z",
+  "next_action": "Recorded in local inbox. Local owner must review before execution.",
+  "result": {
+    "final_summary": "Task accepted as a record-only request.",
+    "structured_finding": [],
+    "verification_note": "No local execution was triggered.",
+    "next_action": "Wait for the receiver to review the inbox record."
+  }
+}

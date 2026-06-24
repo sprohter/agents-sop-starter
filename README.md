@@ -29,6 +29,7 @@
 | 底座治理 | `governance/` | 管理沉淀、隐私、路由、导出、自动化和技能生命周期 |
 | 复制模板 | `templates/` | 快速创建岗位卡、SOP、知识卡和路由项 |
 | 本地接入 | `config-templates/` | 让 Codex / Claude / 其他 Agent 接入本底座 |
+| 可信协作 | `mesh/` | 少量可信 agent 之间的 P2P 接入说明和最小脚本 |
 | 扩展骨架 | `adapters/`、`tools/`、`runtime/`、`collab/`、`case-studies/`、`archive/` | 承接接入、工具、运行态、协作、案例和归档 |
 
 ## 底座架构
@@ -109,6 +110,10 @@ agents-sop-starter/
 │   └── sop.template.md
 ├── collab/                           ← 多 agent 协作骨架：交接、复核、分工的公开规则
 │   └── README.md
+├── mesh/                             ← 可信 peer 协作：P2P 接入卡和安全边界
+│   ├── README.md
+│   └── p2p-peer-onboarding-card.md
+├── scripts/mesh/                     ← LAN P2P 最小脚本：readiness / doctor / server / send / inbox / poller
 ├── case-studies/                     ← 案例骨架：只放脱敏案例摘要和复盘模板
 │   └── README.md
 ├── archive/                          ← 归档骨架：退役内容和历史方案的放置规则
@@ -133,6 +138,7 @@ agents-sop-starter/
 | `tools/` | SOP 需要调用可复用工具或脚本时 | 新增工具索引卡时 |
 | `runtime/` | 讨论运行态、缓存、日志、本机配置边界时 | 只写 README / 示例，不提交真实运行态 |
 | `collab/` | 多 agent 分工、复核、交接时 | 协作协议需要标准化时 |
+| `mesh/` | 少量可信 agent 需要 P2P 接入时 | 只写公开安全说明和模板，不写真实 peer 配置 |
 | `case-studies/` | 需要参考脱敏案例摘要时 | 只写可公开的抽象案例，不写真实证据 |
 | `archive/` | 查历史方案或退役内容时 | 文件退役但仍需保留替代入口时 |
 | `config-templates/` | 接入本地 agent 或配置样板时 | 只放占位符，不放真实配置 |
@@ -177,6 +183,23 @@ routing.md 命中：客服反馈 / 问题处理
 3. 用 `templates/sop.template.md` 创建 SOP，放到 `sops/<domain>/<sop-name>.md`。
 4. 在 `routing.md` 增加触发词和入口文件。
 5. 执行后把稳定经验写入 `knowledge/`，把规则调整写入 `governance/`。
+
+## 可信 Peer P2P 接入
+
+如果只是少量可信同事之间偶尔互通 agent，不需要先建设团队级 Hub。让同事的本地 agent 读取：
+
+```text
+mesh/p2p-peer-onboarding-card.md
+```
+
+它会引导同事 agent：
+
+1. 检查本地 Node.js 和 P2P 脚本。
+2. 生成本机 `node_id`、`public_base_url` 和请求 capability。
+3. 输出需要发给 peer owner 的接入信息。
+4. 等 owner 私下提供 shared key 后，再跑 readiness、doctor 和 smoke。
+
+真实共享 key、真实 peer IP 和运行态只保存在各自本机 `runtime/local-secrets/` 与 `runtime/state/`。
 
 如果想先看完整样例：
 

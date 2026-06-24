@@ -1,0 +1,53 @@
+{
+  "local_node": {
+    "node_id": "example-windows",
+    "display_name": "Example Windows Agent",
+    "listen_host": "0.0.0.0",
+    "listen_port": 8788,
+    "public_base_url": "http://192.0.2.20:8788"
+  },
+  "security": {
+    "auth_scheme": "hmac-sha256-v1",
+    "clock_skew_seconds": 300,
+    "nonce_ttl_seconds": 600,
+    "max_body_bytes": 65536
+  },
+  "defaults": {
+    "mode": "record_only",
+    "allowed_inbound_capabilities": [
+      "readonly_diagnosis",
+      "test_plan_review",
+      "test_data_suggestion",
+      "bug_summary",
+      "report_drafting",
+      "route_review"
+    ],
+    "allowed_outbound_capabilities": [
+      "readonly_diagnosis",
+      "test_plan_review",
+      "test_data_suggestion",
+      "bug_summary",
+      "report_drafting",
+      "route_review"
+    ]
+  },
+  "peers": [
+    {
+      "peer_id": "example-mac",
+      "display_name": "Example Mac Agent",
+      "base_url": "http://192.0.2.21:8788",
+      "shared_key_env": "MESH_P2P_EXAMPLE_MAC_KEY",
+      "allowed_capabilities": [
+        "readonly_diagnosis",
+        "test_plan_review",
+        "test_data_suggestion",
+        "bug_summary",
+        "report_drafting",
+        "route_review"
+      ],
+      "allow_inbound": true,
+      "allow_outbound": true,
+      "notes": "Replace sample IPs and env var names in runtime/local-secrets/mesh-p2p/peers.json. Do not put real secrets in this template."
+    }
+  ]
+}

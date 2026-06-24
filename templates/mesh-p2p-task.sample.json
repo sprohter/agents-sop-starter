@@ -1,0 +1,32 @@
+{
+  "protocol_version": "0.1",
+  "message_id": "msg-example-20260622-0001",
+  "task_id": "task-example-20260622-0001",
+  "from_node": "example-windows",
+  "to_node": "example-mac",
+  "capability": "test_plan_review",
+  "mode": "record_only",
+  "objective": "Ask a peer testing-role agent to draft a test strategy.",
+  "constraints": [
+    "read_only",
+    "no_external_write",
+    "do_not_expose_local_paths_or_secrets"
+  ],
+  "expected_output": [
+    "final_summary",
+    "structured_finding",
+    "verification_note",
+    "next_action"
+  ],
+  "payload": {
+    "text": "Please design a test plan for this requirement summary. Include test data suggestions and mark anything that needs human confirmation."
+  },
+  "reply_policy": {
+    "max_wait_seconds": 0,
+    "receipt_only": true
+  },
+  "trace": {
+    "conversation_id": "example-lan-p2p",
+    "source": "manual"
+  }
+}

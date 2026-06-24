@@ -1,4 +1,4 @@
-﻿# Business Feedback To Issue Tracker SOP
+# Business Feedback To Issue Tracker SOP
 
 > Public-safe example SOP.
 > Goal: turn a user or business feedback item into the right closure path, and create a tracked issue only when development work is actually needed.

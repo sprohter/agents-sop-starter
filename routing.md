@@ -30,6 +30,7 @@
 | 工具索引、脚本说明、工具卡 | `tools/README.md` | 工具层说明 |
 | runtime、缓存、日志、本机配置、运行态噪音 | `runtime/README.md` | 运行态边界 |
 | 多 agent 协作、交接、复核 | `collab/README.md` | 协作骨架 |
+| LAN P2P、P2P peer、trusted peer、同事 agent 接入、可信 agent 互通 | `mesh/p2p-peer-onboarding-card.md` | 少量可信 peer 接入卡 |
 | 案例、复盘、脱敏样例 | `case-studies/README.md` | 案例骨架 |
 | 归档、退役、历史方案 | `archive/README.md` | 归档规则 |
 | 资产登记、治理面板、文件状态、public/private 标记 | `governance/asset-registry.md` | 轻量资产目录规则 |
