@@ -45,6 +45,7 @@ scripts/mesh/p2p-server.js
 scripts/mesh/p2p-send.js
 scripts/mesh/p2p-inbox.js
 scripts/mesh/p2p-poller.js
+scripts/mesh/restart-windows-p2p.ps1
 ```
 
 Local-only files you may create:
@@ -161,6 +162,8 @@ macOS / Linux:
 export MESH_P2P_KEY_<PAIR_ALIAS>='<shared-key-value>'
 ```
 
+If you later rotate or correct this value, restart the listener. A running Node process does not automatically pick up changes made in another shell or on disk.
+
 ## 7. Readiness Check
 
 Windows PowerShell:
@@ -195,6 +198,18 @@ node scripts/mesh/p2p-server.js --config runtime/local-secrets/mesh-p2p/peers.js
 
 For first setup, keep this terminal open. Do not install a background service yet.
 
+On Windows, after the first manual setup, prefer the guarded restart helper:
+
+```powershell
+.\scripts\mesh\restart-windows-p2p.ps1 -TimeoutSeconds 20
+```
+
+It reloads the local key value, restarts the P2P server/worker silently, checks `/health`, and runs a local signed self-check. The latest local-only result is written under:
+
+```text
+runtime/state/mesh-p2p/status/restart-windows-p2p-last-result.json
+```
+
 ## 9. Doctor Check
 
 In another terminal:
@@ -202,19 +217,21 @@ In another terminal:
 Windows PowerShell:
 
 ```powershell
-node .\scripts\mesh\p2p-doctor.js --config .\runtime\local-secrets\mesh-p2p\peers.json --peer <owner-node-id>
+node .\scripts\mesh\p2p-doctor.js --config .\runtime\local-secrets\mesh-p2p\peers.json --peer <owner-node-id> --signed
 ```
 
 macOS / Linux:
 
 ```bash
-node scripts/mesh/p2p-doctor.js --config runtime/local-secrets/mesh-p2p/peers.json --peer <owner-node-id>
+node scripts/mesh/p2p-doctor.js --config runtime/local-secrets/mesh-p2p/peers.json --peer <owner-node-id> --signed
 ```
+
+Do not treat `/health` alone as P2P ready. `/health` only proves the peer process is alive. `--signed` proves both sides are using compatible HMAC runtime values.
 
 If the machine has VPN or multiple network adapters, prefer the physical LAN address:
 
 ```bash
-node scripts/mesh/p2p-doctor.js --config runtime/local-secrets/mesh-p2p/peers.json --peer <owner-node-id> --local-address <your-lan-ip>
+node scripts/mesh/p2p-doctor.js --config runtime/local-secrets/mesh-p2p/peers.json --peer <owner-node-id> --signed --local-address <your-lan-ip>
 ```
 
 ## 10. Send Smoke Request

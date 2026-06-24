@@ -325,6 +325,19 @@ function getPeerSharedKey(peer) {
   return process.env[peer.shared_key_env] || '';
 }
 
+function getPeerSharedKeyStatus(peer, options = {}) {
+  const sharedKey = getPeerSharedKey(peer);
+  const prefixLength = Number(options.prefixLength || 12);
+  return {
+    peer_id: peer && peer.peer_id ? peer.peer_id : '',
+    shared_key_env: peer && peer.shared_key_env ? peer.shared_key_env : '',
+    key_loaded: Boolean(sharedKey),
+    key_fingerprint_prefix: sharedKey
+      ? sha256Hex(`agents-p2p-shared-key-fingerprint-v1\n${sharedKey}`).slice(0, Math.max(4, Math.min(prefixLength, 32)))
+      : '',
+  };
+}
+
 function validateTaskEnvelope(task, config, peer, direction = 'inbound') {
   const errors = [];
   const publicSet = new Set(loadPublicCapabilities());
@@ -949,6 +962,7 @@ module.exports = {
   validateConfig,
   findPeer,
   getPeerSharedKey,
+  getPeerSharedKeyStatus,
   getPeerCapabilities,
   validateTaskEnvelope,
   filterTaskForStorage,

@@ -12,6 +12,7 @@ const {
   validateConfig,
   findPeer,
   getPeerSharedKey,
+  getPeerSharedKeyStatus,
   validateTaskEnvelope,
   filterTaskForStorage,
   buildReceipt,
@@ -66,6 +67,46 @@ function getHeader(req, name) {
 function parseSignature(value) {
   const match = String(value || '').match(/^hmac-sha256=([0-9a-f]+)$/i);
   return match ? match[1] : '';
+}
+
+function buildRuntimeStatus(config, configPath, stateRoot, host, port) {
+  return {
+    ok: true,
+    status: 'listening',
+    protocol_version: protocolVersion,
+    started_at: new Date().toISOString(),
+    pid: process.pid,
+    listen_host: host,
+    listen_port: port,
+    config: toRepoPath(configPath),
+    state_root: toRepoPath(stateRoot),
+    local_node_id: config.local_node.node_id,
+    peers: config.peers.map((peer) => getPeerSharedKeyStatus(peer)),
+  };
+}
+
+function buildHealthAuthSummary(config) {
+  return {
+    peer_count: config.peers.length,
+    peers: config.peers.map((peer) => {
+      const status = getPeerSharedKeyStatus(peer);
+      return {
+        peer_id: status.peer_id,
+        key_loaded: status.key_loaded,
+      };
+    }),
+  };
+}
+
+async function writeRuntimeStatus(stateRoot, status) {
+  const statusPath = path.join(stateRoot, 'status', 'p2p-server-status.json');
+  await fsp.mkdir(path.dirname(statusPath), { recursive: true });
+  try {
+    await fsp.writeFile(statusPath, `${JSON.stringify(status, null, 2)}\n`, { encoding: 'utf8', mode: 0o600 });
+  } catch {
+    await fsp.writeFile(statusPath, `${JSON.stringify(status, null, 2)}\n`, 'utf8');
+  }
+  return statusPath;
 }
 
 async function authenticateRequest(req, config, stateRoot, rawBody, requestPath) {
@@ -303,6 +344,23 @@ async function handleReceipt(req, res, context, taskId) {
   respondJson(res, 200, receipt);
 }
 
+async function handleProbe(req, res, context) {
+  const { config, stateRoot } = context;
+  const auth = await authenticateRequest(req, config, stateRoot, '', '/v1/p2p/probe');
+  if (!auth.ok) {
+    errorResponse(res, auth.code, auth.message);
+    return;
+  }
+  respondJson(res, 200, {
+    ok: true,
+    status: 'signed_probe_ok',
+    protocol_version: protocolVersion,
+    peer_id: auth.peer.peer_id,
+    local_node_id: config.local_node.node_id,
+    checked_at: new Date().toISOString(),
+  });
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const configPath = path.resolve(args.config || defaultConfigPath);
@@ -314,15 +372,24 @@ async function main() {
 
   const host = args.host || config.local_node.listen_host || '127.0.0.1';
   const port = Number(args.port || config.local_node.listen_port);
-  const context = { config, stateRoot };
+  const runtimeStatus = buildRuntimeStatus(config, configPath, stateRoot, host, port);
+  const context = { config, stateRoot, runtimeStatus };
   let server;
   server = http.createServer(async (req, res) => {
     try {
       const url = new URL(req.url, `http://${req.headers.host || `${host}:${port}`}`);
       if (req.method === 'GET' && url.pathname === '/health') {
-        respondJson(res, 200, { ok: true, protocol_version: protocolVersion, status: 'ready' });
+        respondJson(res, 200, {
+          ok: true,
+          protocol_version: protocolVersion,
+          status: 'ready',
+          auth: buildHealthAuthSummary(config),
+        });
       } else if (req.method === 'POST' && url.pathname === '/v1/p2p/tasks') {
         await handleTask(req, res, context);
+        if (args.once) setImmediate(() => server.close());
+      } else if (req.method === 'GET' && url.pathname === '/v1/p2p/probe') {
+        await handleProbe(req, res, context);
         if (args.once) setImmediate(() => server.close());
       } else if (req.method === 'GET' && url.pathname.startsWith('/v1/p2p/receipts/')) {
         await handleReceipt(req, res, context, decodeURIComponent(url.pathname.slice('/v1/p2p/receipts/'.length)));
@@ -335,15 +402,16 @@ async function main() {
     }
   });
 
-  server.listen(port, host, () => {
+  server.listen(port, host, async () => {
+    let statusFile = '';
+    try {
+      statusFile = await writeRuntimeStatus(stateRoot, runtimeStatus);
+    } catch {
+      statusFile = '';
+    }
     process.stdout.write(`${JSON.stringify({
-      ok: true,
-      status: 'listening',
-      protocol_version: protocolVersion,
-      listen_host: host,
-      listen_port: port,
-      config: toRepoPath(configPath),
-      state_root: toRepoPath(stateRoot),
+      ...runtimeStatus,
+      status_file: statusFile ? toRepoPath(statusFile) : '',
       once: !!args.once,
     })}\n`);
   });
