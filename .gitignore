@@ -6,6 +6,10 @@ runtime/*
 !runtime/local-secrets/**/
 !runtime/local-secrets/**/README.md
 !runtime/local-secrets/**/*.example
+runtime/local-secrets/**/*
+!runtime/local-secrets/**/
+!runtime/local-secrets/**/README.md
+!runtime/local-secrets/**/*.example
 runtime/local-secrets/mesh-p2p/*.json
 runtime/local-secrets/mesh-p2p/**/*.json
 !runtime/state/

@@ -67,6 +67,22 @@ function readJsonFile(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
 
+function readOptionalSecretFile(filePath) {
+  if (!filePath || typeof filePath !== 'string') return '';
+  const normalized = path.normalize(filePath);
+  if (!path.isAbsolute(normalized) && (normalized === '..' || normalized.startsWith(`..${path.sep}`))) return '';
+  try {
+    const resolved = path.isAbsolute(filePath)
+      ? filePath
+      : path.resolve(agentsRoot, filePath);
+    const relative = path.relative(agentsRoot, resolved);
+    if (!path.isAbsolute(filePath) && (relative === '..' || relative.startsWith(`..${path.sep}`))) return '';
+    return fs.readFileSync(resolved, 'utf8').trim();
+  } catch {
+    return '';
+  }
+}
+
 async function writeJsonFile(filePath, data) {
   await fsp.mkdir(path.dirname(filePath), { recursive: true });
   const tmpPath = path.join(
@@ -281,15 +297,18 @@ function validateConfig(config, options = {}) {
     if (seenPeers.has(peer.peer_id)) errors.push(`duplicate peer_id: ${peer.peer_id}`);
     seenPeers.add(peer.peer_id);
     if (peer.peer_id === local.node_id) errors.push(`peer_id must not equal local node_id: ${peer.peer_id}`);
-    if ('shared_key' in peer) errors.push(`peer ${peer.peer_id} must not contain shared_key; use shared_key_env.`);
+    if ('shared_key' in peer) errors.push(`peer ${peer.peer_id} must not contain shared_key; use shared_key_env or shared_key_file.`);
+    if (peer.shared_key_file !== undefined && typeof peer.shared_key_file !== 'string') {
+      errors.push(`peer ${peer.peer_id} shared_key_file must be a string when present.`);
+    }
     if (!peer.shared_key_env || typeof peer.shared_key_env !== 'string') {
       errors.push(`peer ${peer.peer_id} must define shared_key_env.`);
     } else if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(peer.shared_key_env)) {
       errors.push(`peer ${peer.peer_id} has invalid shared_key_env name.`);
     } else {
-      const value = process.env[peer.shared_key_env];
+      const value = getPeerSharedKey(peer);
       if (!value) {
-        const message = `peer ${peer.peer_id} key env is not set: ${peer.shared_key_env}`;
+        const message = `peer ${peer.peer_id} shared key is not loaded from env or file: ${peer.shared_key_env}`;
         if (options.requireKeys) errors.push(message);
         else warnings.push(message);
       } else if (value.length < 16) {
@@ -322,7 +341,7 @@ function findPeer(config, peerId) {
 
 function getPeerSharedKey(peer) {
   if (!peer || !peer.shared_key_env) return '';
-  return process.env[peer.shared_key_env] || '';
+  return process.env[peer.shared_key_env] || readOptionalSecretFile(peer.shared_key_file);
 }
 
 function getPeerSharedKeyStatus(peer, options = {}) {
@@ -331,6 +350,7 @@ function getPeerSharedKeyStatus(peer, options = {}) {
   return {
     peer_id: peer && peer.peer_id ? peer.peer_id : '',
     shared_key_env: peer && peer.shared_key_env ? peer.shared_key_env : '',
+    shared_key_file_configured: Boolean(peer && peer.shared_key_file),
     key_loaded: Boolean(sharedKey),
     key_fingerprint_prefix: sharedKey
       ? sha256Hex(`agents-p2p-shared-key-fingerprint-v1\n${sharedKey}`).slice(0, Math.max(4, Math.min(prefixLength, 32)))

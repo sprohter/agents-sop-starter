@@ -37,6 +37,7 @@
       "display_name": "Example Mac Agent",
       "base_url": "http://192.0.2.21:8788",
       "shared_key_env": "MESH_P2P_EXAMPLE_MAC_KEY",
+      "shared_key_file": "runtime/local-secrets/mesh-p2p/shared-key-example-mac.txt",
       "allowed_capabilities": [
         "readonly_diagnosis",
         "test_plan_review",
@@ -47,7 +48,7 @@
       ],
       "allow_inbound": true,
       "allow_outbound": true,
-      "notes": "Replace sample IPs and env var names in runtime/local-secrets/mesh-p2p/peers.json. Do not put real secrets in this template."
+      "notes": "Replace sample IPs and env/file names in runtime/local-secrets/mesh-p2p/peers.json. Store the real key only in a local env var or the local shared_key_file. Do not put real secrets in this template."
     }
   ]
 }
