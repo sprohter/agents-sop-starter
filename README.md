@@ -178,7 +178,7 @@ routing.md 命中：客服反馈 / 问题处理
 
 ## 最小使用流程
 
-1. 复制整个 `agents-sop-starter/` 到团队共享目录或项目本地 `.agents/` 下。
+1. 复制整个 `agents-sop-starter/` 到团队共享目录，或作为新项目的独立 agent 底座目录安装。若安装到某个业务项目的 `.agents/`，它只是该业务项目的宿主接入目录，不会成为本仓的 Git 真源。
 2. 用 `templates/role-card.template.md` 创建岗位卡，放到 `roles/<role-name>.md`。
 3. 用 `templates/sop.template.md` 创建 SOP，放到 `sops/<domain>/<sop-name>.md`。
 4. 在 `routing.md` 增加触发词和入口文件。
