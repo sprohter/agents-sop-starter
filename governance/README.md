@@ -13,10 +13,14 @@
 | 修改治理、路由、skill、自动化或共享结构 | `change-control.md` |
 | 创建定时任务、后台同步或监控 | `automation-rules.md` |
 | 创建、共享或退役 skill | `skill-governance.md` |
+| 判断脚本、工具、skill 或 peer 能力能否共享 | `capability-publication.md` |
+| 判断是否需要多 agent 复核、worker 或人工确认 | `multi-agent-review.md` |
 | 维护触发词和入口路由 | `routing-maintenance.md` |
 | 发现 agent 走错路、证据不足、输出偏移 | `self-correction.md` |
 | 判断经验应沉淀到哪里 | `sedimentation.md` |
+| 管理会话、协作账本、运行态和临时输出留存 | `session-retention.md` |
 | 维护资产目录且避免泄露敏感信息 | `asset-registry.md` |
+| 定期检查底座是否变乱、变重或偏离分享边界 | `governance-health-check.md` |
 | 维护 starter 目录结构 | `maintenance-rules.md` |
 
 ## 基线原则
@@ -33,6 +37,6 @@
 
 - 入口层：`README.md`、`contract.md`、`routing.md`。
 - 执行层：`roles/`、`sops/`、`knowledge/`、`templates/`。
-- 治理层：`governance/`，至少覆盖维护、沉淀、纠偏、隐私、导出、变更和自动化。
+- 治理层：`governance/`，至少覆盖维护、沉淀、纠偏、隐私、导出、变更、自动化、能力发布、协作复核、会话留存和周期体检。
 - 接入层：`config-templates/`、`adapters/`。
 - 边界层：`runtime/`、`tools/`、`collab/`、`case-studies/`、`archive/` 的 README 骨架。

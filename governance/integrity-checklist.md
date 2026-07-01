@@ -33,6 +33,10 @@
 | 变更控制 | `governance/change-control.md` |
 | 自动化规则 | `governance/automation-rules.md` |
 | skill 治理 | `governance/skill-governance.md` |
+| 能力发布 | `governance/capability-publication.md` |
+| 多 agent 复核 | `governance/multi-agent-review.md` |
+| 会话留存 | `governance/session-retention.md` |
+| 周期体检 | `governance/governance-health-check.md` |
 | 资产目录 | `governance/asset-registry.md` |
 | 路由维护 | `governance/routing-maintenance.md` |
 

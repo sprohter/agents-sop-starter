@@ -26,6 +26,10 @@
 | 修改治理规则、框架变更、推送、删除、合并、force-with-lease | `governance/change-control.md` | 变更分级和外部写入门禁 |
 | 定时任务、自动同步、后台任务、watchdog、不要新开会话 | `governance/automation-rules.md` | 自动化登记和静默运行规则 |
 | 创建 skill、共享 skill、skill 生命周期、技能退役 | `governance/skill-governance.md` | 技能治理规则 |
+| 脚本能力、工具能力、adapter 能力、能力发布、capability、公开能力边界 | `governance/capability-publication.md` | 能力发布与工具边界 |
+| 多 agent 协作、复核、reviewer、worker、人工确认、高影响动作分级 | `governance/multi-agent-review.md` | 协作复核触发和降级规则 |
+| 会话留存、运行态留存、聊天记录、临时输出、缓存清理、协作账本 | `governance/session-retention.md` | 会话与运行态留存规则 |
+| 底座体检、治理体检、季度检查、文档变乱、重复资产、归档候选 | `governance/governance-health-check.md` | 周期治理检查清单 |
 | adapter、Codex 接入、Claude 接入、多宿主 | `adapters/README.md` | 接入层说明 |
 | 工具索引、脚本说明、工具卡 | `tools/README.md` | 工具层说明 |
 | runtime、缓存、日志、本机配置、运行态噪音 | `runtime/README.md` | 运行态边界 |

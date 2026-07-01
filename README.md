@@ -93,14 +93,18 @@ agents-sop-starter/
 │   ├── architecture.md               ← 框架结构分层和依赖关系
 │   ├── asset-registry.md             ← 资产目录与 public/private/internal 标记
 │   ├── automation-rules.md           ← 定时任务、后台同步、不要新开会话
+│   ├── capability-publication.md     ← 脚本、工具、skill、peer 能力的共享边界
 │   ├── change-control.md             ← 变更分级、推送、删除和外部写入门禁
 │   ├── export-profiles.md            ← public starter / private backup / internal package 分级
+│   ├── governance-health-check.md    ← 周期治理体检：入口、重复、沉淀、分享边界
 │   ├── integrity-checklist.md        ← 框架完整性检查清单
 │   ├── maintenance-rules.md          ← 目录维护和最小联动规则
+│   ├── multi-agent-review.md         ← 多 agent 复核、worker、人工确认触发规则
 │   ├── privacy-and-share-boundary.md ← 分享边界与脱敏规则
 │   ├── routing-maintenance.md        ← 路由维护与冲突处理
 │   ├── self-correction.md            ← 自动纠偏机制：发现偏差时如何回到正确路径
 │   ├── sedimentation.md              ← 经验沉淀位置、写法和成熟度
+│   ├── session-retention.md          ← 会话、协作账本、运行态和临时输出留存
 │   └── skill-governance.md           ← Skill 创建、共享、退役规则
 ├── templates/                        ← 复制模板：创建岗位卡、SOP、知识卡、路由项
 │   ├── decision-record.template.md
@@ -234,6 +238,10 @@ mesh/p2p-peer-onboarding-card.md
 | `governance/change-control.md` | 治理、推送、删除、外部写入的变更分级 |
 | `governance/automation-rules.md` | 定时任务、自动同步和后台任务规则 |
 | `governance/skill-governance.md` | 技能创建、共享和退役规则 |
+| `governance/capability-publication.md` | 脚本、工具、skill、adapter 和 peer 能力的共享边界 |
+| `governance/multi-agent-review.md` | 多 agent 复核、worker 分工、人工确认和降级规则 |
+| `governance/session-retention.md` | 会话、协作账本、运行态和临时输出的留存规则 |
+| `governance/governance-health-check.md` | 周期治理体检，检查入口、重复、沉淀质量和分享边界 |
 | `governance/asset-registry.md` | 资产登记和 public/private 标记 |
 | `governance/routing-maintenance.md` | 路由维护与冲突处理 |
 | `governance/self-correction.md` | 自动纠偏机制，防止错误路径持续扩散 |

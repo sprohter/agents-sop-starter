@@ -35,7 +35,11 @@
 | 改治理、路由、skill 或同步任务前怎么控风险 | `change-control.md` |
 | 定时任务、后台任务、自动同步怎么登记 | `automation-rules.md` |
 | skill 怎么创建、共享、退役 | `skill-governance.md` |
+| 脚本、工具、adapter 或 peer 能力怎么安全共享 | `capability-publication.md` |
+| 什么时候需要多 agent 复核或人工确认 | `multi-agent-review.md` |
+| 会话、协作账本、运行态和临时输出怎么留存 | `session-retention.md` |
 | 资产目录怎么登记，避免泄露运行态 | `asset-registry.md` |
+| 底座是否变乱、变重、重复或偏离分享边界 | `governance-health-check.md` |
 | agent 走错路、证据不足或输出偏移怎么纠正 | `self-correction.md` |
 | 框架结构是否完整 | `architecture.md`、`integrity-checklist.md` |
 
