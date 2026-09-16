@@ -1,4 +1,4 @@
-﻿---
+---
 name: dws
 description: Use a DingTalk/DWS-style collaboration CLI for public-safe workflows such as AI table updates, group-visible status sync, todo creation, and readback checks. Keep credentials and real IDs outside the shared repository.
 ---
